@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import Navbar from "./../containers/navbar";
-import TradeCard from "./../containers/tradeCard";
+import ShareCard from "./../containers/shareCard";
 import Button from "../views/Button.jsx";
 import Status from "../views/Status.jsx";
+import OrderForm from "./../containers/orderForm"
 
 //import { fetchSessionsThunk } from "../../thunks";
 import { connect } from "react-redux";
@@ -30,15 +31,14 @@ class UserHomePage extends Component {
           {(portfolio.length > 0) ?
             (
             portfolio.map(stock => (
-              <TradeCard ticker={stock.ticker} numShares={stock.shares}/>
+              <ShareCard ticker={stock.ticker} numShares={stock.shares}/>
             ))
           )
             :
             (<p className="card-subtitle centered">Welcome! Go buy some stocks!</p>)
           }
-
-        <TradeCard/>
         </div>
+        <OrderForm/>
       </div>
     );
   }

@@ -1,6 +1,5 @@
 import React from "react";
 import { FormBase, FormField, FormRow } from "./Form.jsx";
-import Collapsible from "../containers/Collapsible.js";
 
 import "../../styles/common.css";
 

@@ -16,7 +16,7 @@ class Navbar extends Component {
             <NavLink to="/home">Home</NavLink>
           </li>
           <li>
-            <NavLink to="/graphs">Stats</NavLink>
+            <NavLink to="/trades">Audit</NavLink>
           </li>
           <li>
             <NavLink to="/logout">Logout</NavLink>

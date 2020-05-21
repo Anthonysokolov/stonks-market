@@ -3,7 +3,7 @@ import { withRouter, Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
 import Home from "./components/views/home";
-import SingleSessionPage from "./components/containers/singleSessionPage";
+import AuditPage from "./components/containers/auditPage";
 import UserHomePage from "./components/containers/userHomePage";
 import AddSessionPage from "./components/containers/addSessionPage";
 import { Login, Signup } from "./components/containers/authFormContainer";
@@ -50,15 +50,9 @@ function App(props) {
           loggedIn={true}//{props.isLoggedIn}
         />
         <ProtectedRoute
-          exact
-          path="/session/add"
-          component={AddSessionPage}
-          loggedIn={props.isLoggedIn}
-        />
-        <ProtectedRoute
-          path="/session/:id"
-          component={SingleSessionPage}
-          loggedIn={props.isLoggedIn}
+          path="/trades"
+          component={AuditPage}
+          loggedIn={true}//{props.isLoggedIn}
         />
         <ProtectedRoute
           path="/logout"
