@@ -3,10 +3,9 @@ import Navbar from "./navbar";
 import Session from "../views/sessionDetails.js";
 import ClimbCard from "../views/climbCard.js";
 import AddClimbCard from "../views/addClimbCard.js";
-import BarChart from "./BarChart.js";
 import Status from "../views/Status.jsx";
 
-import { getSessionThunk, getProblemsThunk, addClimbThunk } from "../../thunks";
+import { /*getSessionThunk*/ } from "../../thunks";
 import { connect } from "react-redux";
 
 class SingleSessionPage extends Component {
@@ -84,24 +83,7 @@ class SingleSessionPage extends Component {
           hideStatus="success"
           text={this.props.statusMessage}
         >
-          <Session {...this.props.session} />
-          {problems.length > 0 && (
-          <Status
-            type={this.props.graphStatusClass}
-            hideStatus="success"
-            text={this.props.graphStatusMessage}
-          >
-            <div className="centered">
-              <h2> </h2>
-              <BarChart
-                data={this.props.data}
-                width={this.state.width}
-                height={this.state.height}
-                key={barChartId}
-              />
-            </div>
-          </Status>
-          )}
+        
           <AddClimbCard
             nameHandler={this.handleChangeName}
             gradeHandler={this.handleChangeGrade}
@@ -141,9 +123,7 @@ function mapState(state) {
 
 function mapDispatch(dispatch) {
   return {
-    getSession: id => dispatch(getSessionThunk(id)),
-    addClimb: id => dispatch(addClimbThunk(id)),
-    getProblems: id => dispatch(getProblemsThunk(id))
+    //getSession: id => dispatch(getSessionThunk(id)),
   };
 }
 

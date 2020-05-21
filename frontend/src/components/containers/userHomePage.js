@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import Navbar from "./../containers/navbar";
-import SessionCard from "./../views/sessionCard";
+import TradeCard from "./../containers/tradeCard";
 import Button from "../views/Button.jsx";
 import Status from "../views/Status.jsx";
 
-import { fetchSessionsThunk } from "../../thunks";
+//import { fetchSessionsThunk } from "../../thunks";
 import { connect } from "react-redux";
 
 import "./../views/userHomePage.css";
@@ -12,30 +12,33 @@ import "./../views/userHomePage.css";
 class UserHomePage extends Component {
   constructor(props) {
     super(props);
-    this.props.fetchAllSessions();
+    //this.props.fetchAllSessions();
   }
 
   render() {
-    let sessions = this.props.sessions;
-    if (sessions === undefined) {
-      sessions = [];
+    //let portfolio = this.props.portfolio;
+    let portfolio = [{ticker:'TSLA',shares:2},{ticker:'AAPL',shares:3},{ticker:"AMD",shares:5}]
+    if (portfolio === undefined) {
+      portfolio = [];
     }
 
     return (
       <div>
         <Navbar />
-        <h1 className="centered">My Bouldering Sessions</h1>
-        <Status type={this.props.status} hideStatus="success" text={this.props.message}>
-          {(sessions.length > 0) ? 
-            (<p className="card-subtitle centered">You have recorded {sessions.length} climbing adventures. You're making great progress.</p>) 
-            : 
-            (<p className="card-subtitle centered">Welcome! Every time you go bouldering, you can record it by clicking on the add button!</p>)
+        <h1 className="centered">Stonk Exchange</h1>
+        <div>
+          {(portfolio.length > 0) ?
+            (
+            portfolio.map(stock => (
+              <TradeCard ticker={stock.ticker} numShares={stock.shares}/>
+            ))
+          )
+            :
+            (<p className="card-subtitle centered">Welcome! Go buy some stocks!</p>)
           }
-          <div className="centered"><Button to="/session/add">Add</Button></div>
-          {sessions.map((session, index) => {
-            return <SessionCard {...session} key={session.id} index={index + 1} />;
-          })}
-        </Status>
+
+        <TradeCard/>
+        </div>
       </div>
     );
   }
@@ -43,7 +46,7 @@ class UserHomePage extends Component {
 
 function mapState(state) {
   return {
-    sessions: state.sessions.list,
+    trades: state.sessions.list,
     status: state.sessions.status,
     message: state.sessions.message
   };
@@ -51,8 +54,12 @@ function mapState(state) {
 
 function mapDispatch(dispatch) {
   return {
-    fetchAllSessions: () => dispatch(fetchSessionsThunk())
+    //fetchAllSessions: () => dispatch(fetchSessionsThunk())
   };
 }
 
 export default connect(mapState, mapDispatch)(UserHomePage);
+/*  <div className="centered"><Button to="/session/add">Add</Button></div>
+  {sessions.map((session, index) => {
+    return <SessionCard {...session} key={session.id} index={index + 1} />;
+  })} */

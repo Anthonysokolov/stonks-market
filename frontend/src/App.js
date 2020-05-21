@@ -47,7 +47,7 @@ function App(props) {
         <ProtectedRoute
           path="/home"
           component={UserHomePage}
-          loggedIn={props.isLoggedIn}
+          loggedIn={true}//{props.isLoggedIn}
         />
         <ProtectedRoute
           exact
