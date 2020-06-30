@@ -68,9 +68,9 @@ function App(props) {
   );
 }
 
-function mapUserToProps(appState) {
+function mapUserToProps(state) {
   return {
-    isLoggedIn: appState.user.isLoggedIn
+    isLoggedIn: state.user.isLoggedIn
   };
 }
 

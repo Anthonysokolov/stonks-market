@@ -1,7 +1,28 @@
 const express = require('express')
 const router = express.Router()
-const {User, Session, Problem} = require('../database/models')
+const {User} = require('../database/models')
 
+router.get("/balance", function(req, res, next){
+  User.findAll({
+        attributes:['balance'],
+        where:{id:1}}) //req.user.id
+    .then(user => res.json(user))
+    .catch(err => next(err))
+})
+
+router.post("/deduct/:deductBy", function(req, res, next){
+  User.findOne({
+    attributes:['balance'],
+    where:{id:req.user.id}})
+  .then(user => {
+    user.balance -= deductBy
+    await user.save()
+    return res.json(user)
+  })
+  .catch(err => next(err))
+  let deductBy = req.params.deductBy
+})
+/*
 router.get('/', function(req, res, next){
   User.findAll()
     .then(users => res.status(200).json(users))

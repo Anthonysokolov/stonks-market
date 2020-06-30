@@ -11,3 +11,5 @@
    */
 export * from "../store/utilities/user";
 export * from "../store/utilities/sessions";
+export * from "../store/utilities/tickers";
+export * from "../store/utilities/userData"

@@ -4,5 +4,5 @@
 	store/index.js. Each utility file must default export their reducer
 */
 export { default as user } from "../store/utilities/user";
-export { default as sessions } from "../store/utilities/sessions";
-export { default as singleSession } from "../store/utilities/singleSession";
+export { default as ticker } from "../store/utilities/tickers";
+export { default as userData } from "../store/utilities/userData";

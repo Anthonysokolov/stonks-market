@@ -2,18 +2,7 @@ const users = [
   {
     "username":"asoko",
     "password":"password",
-  },
-  {
-    "username":"jacruse",
-    "password":"password",
-  },
-  {
-    "username":"xingtao",
-    "password":"password",
-  },
-  {
-    "username":"max",
-    "password":"password",
+    "balance":5000
   }
 ]
 

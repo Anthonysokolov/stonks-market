@@ -78,8 +78,8 @@ const mapSignup = state => {
 // Map dispatch to props;
 const mapDispatch = dispatch => {
   return {
-    loginOrSignup: (email, password, action, history) =>
-      dispatch(loginThunk(email, password, action, history))
+    loginOrSignup: (name, password, action, history, ) =>
+      dispatch(loginThunk(name, password, action, history))
   };
 };
 

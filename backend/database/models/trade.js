@@ -9,6 +9,9 @@ const Trade = db.define("trade",{
   ticker:{
     type: Sequelize.STRING,
   },
+  price:{
+    type: Sequelize.INTEGER
+  },
   numShares:{
     type: Sequelize.INTEGER
   },

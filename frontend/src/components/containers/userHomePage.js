@@ -9,11 +9,24 @@ import OrderForm from "./../containers/orderForm"
 import { connect } from "react-redux";
 
 import "./../views/userHomePage.css";
+import "../../styles/card.css"
+
+
+import { fetchStockPrice, getBalance } from "../../thunks";
+
 
 class UserHomePage extends Component {
   constructor(props) {
     super(props);
     //this.props.fetchAllSessions();
+  }
+
+  componentDidMount(){
+    this.props.getBalance()
+    let portfolio = [{ticker:'TSLA',shares:2},{ticker:'AAPL',shares:3},{ticker:"AMD",shares:5}]
+    portfolio.map(stock=>(
+      this.props.fetchStockPrice(stock.ticker)
+    ))
   }
 
   render() {
@@ -23,39 +36,36 @@ class UserHomePage extends Component {
       portfolio = [];
     }
 
-    return (
-      <div>
-        <Navbar />
-        <h1 className="centered">Stonk Exchange</h1>
-        <div>
-          {(portfolio.length > 0) ?
-            (
-            portfolio.map(stock => (
-              <ShareCard ticker={stock.ticker} numShares={stock.shares}/>
-            ))
-          )
-            :
-            (<p className="card-subtitle centered">Welcome! Go buy some stocks!</p>)
-          }
-        </div>
-        <OrderForm/>
-      </div>
-    );
+    const shareCards = []
+    for(var key of Object.keys(this.props.prices)){
+      shareCards.push(<ShareCard ticker={key} price={this.props.prices[key]}/>)
+    }
+    return(<div >
+            <Navbar/>
+            <h1 className="centered">Stonk Exchange</h1>
+            <p className="centered"> Funds: {this.props.funds} </p>
+            <div>
+            {shareCards}
+            </div>
+            <OrderForm/>
+          </div>)
   }
 }
 
-function mapState(state) {
+function mapState(state){
   return {
-    trades: state.sessions.list,
-    status: state.sessions.status,
-    message: state.sessions.message
-  };
+    prices: state.ticker.prices,
+    loading: state.ticker.loading,
+    numStocks: state.ticker.num,
+    funds:state.ticker.balance
+  }
 }
 
-function mapDispatch(dispatch) {
-  return {
-    //fetchAllSessions: () => dispatch(fetchSessionsThunk())
-  };
+function mapDispatch(dispatch){
+  return{
+    fetchStockPrice: (ticker) => dispatch(fetchStockPrice(ticker)),
+    getBalance: () => dispatch(getBalance())
+  }
 }
 
 export default connect(mapState, mapDispatch)(UserHomePage);

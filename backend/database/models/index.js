@@ -1,10 +1,10 @@
 const User = require('./user')
-const Trades = require('./trades')
+const Trade = require('./trade')
 
-User.hasMany(Trades)
-Trades.belongsTo(User)
+User.hasMany(Trade)
+Trade.belongsTo(User)
 
 module.exports = {
   User,
-  Trades
+  Trade
 }

@@ -1,14 +1,12 @@
-const {User, Session, Problem} = require("../database/models")
+const {User, Trade} = require("../database/models")
 
 const syncTables = async () => {
   await User.sync({force:true})
-  await Session.sync({force:true})
-  await Problem.sync({force:true})
+  await Trade.sync({force:true})
 }
 
 const users = require('../data/users')
-const sessions = require('../data/sessions')
-const problems = require('../data/problems')
+const trades = require('../data/trades')
 
 const populateUsersTable = async (users) => {
   for(let i = 0; i < users.length; i++){
@@ -16,20 +14,19 @@ const populateUsersTable = async (users) => {
   }
 }
 
-const populateSessionTable = async (sessions) => {
-  for(let i = 0; i < users.length; i++){
-    let currentSession = await Session.create(sessions[i])
-    currentSession.userId = 1
-    await currentSession.save()
+const populateTradesTable = async (trades) => {
+  for(let i = 0; i < trades.length; i++){
+    let currentTrade = await Trade.create(trades[i])
+    currentTrade.userId = 1
+    await currentTrade.save()
   }
 }
-
 
 const seedDatabase = async () => {
   try {
     await syncTables();
     await populateUsersTable(users);
-    await populateSessionTable(sessions);
+    await populateTradesTable(trades);
     console.log("Successfully seeded!");
     process.exit(0);
   }
